@@ -2,7 +2,7 @@ package ru.sbt.mipt.oop;
 
 import java.util.Collection;
 
-public class Room {
+public class Room implements IActionable {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
@@ -26,6 +26,26 @@ public class Room {
     }
 
     public Light getLightById(String objectId) {
+        for (Light light : getLights())
+            if (light.getId().equals( objectId)) {
+                return light;
+            }
         return null;
     }
+
+    @Override
+    public void executeAction(IAction action) {
+        action.execute(this);
+        for (Door door : doors) {
+            door.executeAction(action);
+        }
+        for (Light light: lights) {
+            light.executeAction(action);
+        }
+    }
+
+
 }
+
+
+

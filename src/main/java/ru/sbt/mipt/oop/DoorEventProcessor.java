@@ -2,28 +2,31 @@ package ru.sbt.mipt.oop;
 
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
-
-public class DoorEventProcessor implements EventProcessor {
+//лекция 5
+public class DoorEventProcessor implements IEventProcessor {
 
     public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isDoorEvent(event)) return;
         // событие от двери
-        for (Room room : smartHome.getRooms()) {
-            for (Door door : room.getDoors()) {
+        smartHome.executeAction(object -> {
+            if (object instanceof Door) {
+                Door door = (Door) object;
                 if (door.getId().equals(event.getObjectId())) {
                     if (event.getType() == DOOR_OPEN) {
-                        changeDoorState(room, door, true, " was opened.");
+                        changeDoorState(door, true, " was opened.");
                     } else {
-                        changeDoorState(room, door, false, " was closed.");
+                        changeDoorState(door, false, " was closed.");
                     }
                 }
             }
+
         }
+        );
     }
 
-    private void changeDoorState(Room room, Door door, boolean opened, String s) {
+    private void changeDoorState(Door door, boolean opened, String s) {
         door.setOpen(opened);
-        System.out.println("Door " + door.getId() + " in room " + room.getName() + s);
+        System.out.println("Door " + door.getId() + " in room " + s);
     }
 
     private boolean isDoorEvent(SensorEvent event) {

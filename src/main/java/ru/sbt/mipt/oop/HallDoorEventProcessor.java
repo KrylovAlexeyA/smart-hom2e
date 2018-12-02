@@ -1,8 +1,9 @@
 package ru.sbt.mipt.oop;
 
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
-
-public class HallDoorEventProcessor implements EventProcessor {
+//лекция 5
+//TODO Спросить как реализовать обход итератором , если нужно еще знать комнату,чтобы проверить ее на hall??
+public class HallDoorEventProcessor implements IEventProcessor {
     @Override
     public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (event.getType() != DOOR_CLOSED) return;

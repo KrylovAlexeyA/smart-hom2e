@@ -32,4 +32,12 @@ public class SmartHome {
         }
     }
 
+
+    public void executeAction(IAction action) {
+        action.execute(this);
+        for (Room room : rooms) {
+            room.executeAction(action);
+        }
+    }
+
 }

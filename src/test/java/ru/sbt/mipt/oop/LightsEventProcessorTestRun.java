@@ -1,3 +1,4 @@
+/*
 package ru.sbt.mipt.oop;
 
 import org.junit.runner.JUnitCore;
@@ -16,3 +17,4 @@ public class LightsEventProcessorTestRun {
 
 
 }
+*/

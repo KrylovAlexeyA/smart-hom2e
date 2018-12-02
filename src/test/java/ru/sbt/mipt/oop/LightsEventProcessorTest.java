@@ -2,20 +2,25 @@ package ru.sbt.mipt.oop;
 
 import org.junit.*;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
 
+import static org.junit.Assert.*;
+import static ru.sbt.mipt.oop.LightFinderByID.findLightByID;
 
 
 public class LightsEventProcessorTest {
-
+    private static SmartHomeLoader smartHomeLoader = new FileSmartHomeLoader();
+    SmartHome smartHome = smartHomeLoader.loadSmartHome();
     private LightsEventProcessor lightsEventProcessor;
-    SmartHome smarthome = new SmartHome();
     SensorEventType sensoreventtype1 = SensorEventType.LIGHT_ON;
     SensorEventType sensoreventtype2 = SensorEventType.LIGHT_OFF;
     String objectId = "1";
     String objectId2 = "2";
     SensorEvent sensorevent1 = new SensorEvent(sensoreventtype1, objectId);
     SensorEvent sensorevent2 = new SensorEvent(sensoreventtype2, objectId2);
+
+    public LightsEventProcessorTest() throws IOException {
+    }
 
     @BeforeClass
     public static void beforeClass() {
@@ -40,23 +45,18 @@ public class LightsEventProcessorTest {
     @Test
     public void processEvent() {
         System.out.println("First test");
-        lightsEventProcessor.processEvent(smarthome,sensorevent1);
-        for (Room room : smarthome.getRooms()) {
-            for (Light light : room.getLights()) {
-                if (light.getId().equals("1"))
-                    assertEquals(true, light.isOn());
-            }
-        }
-        lightsEventProcessor.processEvent(smarthome,sensorevent2);
+        lightsEventProcessor.processEvent(smartHome,sensorevent1);
+        Light light1 = findLightByID(smartHome,"1");
+        assertEquals(true, light1.isOn());
+
+
         System.out.println("Second test");
-        for (Room room : smarthome.getRooms()) {
-            for (Light light : room.getLights()) {
-                if (light.getId().equals("2"))
-                    assertEquals(false, light.isOn());
-            }
+        lightsEventProcessor.processEvent(smartHome,sensorevent2);
+        Light light2 = findLightByID(smartHome,"2");
+        assertEquals(false, light2.isOn());
         }
-
-    }
-
 
 }
+
+
+

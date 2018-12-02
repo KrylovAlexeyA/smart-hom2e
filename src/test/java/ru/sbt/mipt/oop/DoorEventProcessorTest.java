@@ -3,19 +3,25 @@ package ru.sbt.mipt.oop;
 import org.junit.*;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
+import static ru.sbt.mipt.oop.DoorFinderByID.findDoorByID;
 
 
 public class DoorEventProcessorTest {
-
-    private DoorEventProcessor dooreventprocessor;
-    SmartHome smarthome = new SmartHome();
+    private static SmartHomeLoader smartHomeLoader = new FileSmartHomeLoader();
+    SmartHome smartHome = smartHomeLoader.loadSmartHome();
+    private DoorEventProcessor doorEventProcessor;
     SensorEventType sensoreventtype1 = SensorEventType.DOOR_OPEN;
     SensorEventType sensoreventtype2 = SensorEventType.DOOR_CLOSED;
     String objectId = "1";
     String objectId2 = "2";
-    SensorEvent sensorevent1 = new SensorEvent(sensoreventtype1, objectId);
-    SensorEvent sensorevent2 = new SensorEvent(sensoreventtype2, objectId2);
+    SensorEvent sensorEvent1 = new SensorEvent(sensoreventtype1, objectId);
+    SensorEvent sensorEvent2 = new SensorEvent(sensoreventtype2, objectId2);
+
+    public DoorEventProcessorTest() throws IOException {
+    }
 
     @BeforeClass
     public static void beforeClass() {
@@ -29,34 +35,30 @@ public class DoorEventProcessorTest {
 
     @Before
     public void initTest() {
-        dooreventprocessor = new DoorEventProcessor();
+        doorEventProcessor = new DoorEventProcessor();
     }
 
     @After
     public void afterTest() {
-        dooreventprocessor = null;
+        doorEventProcessor = null;
     }
 
     @Test
     public void processEvent() {
         System.out.println("First test");
-        dooreventprocessor.processEvent(smarthome,sensorevent1);
-        for (Room room : smarthome.getRooms()) {
-            for (Door door : room.getDoors()) {
-                if (door.getId().equals("1"))
-                    assertEquals(true, door.getIsOpen());
-            }
-        }
-        dooreventprocessor.processEvent(smarthome,sensorevent2);
+        doorEventProcessor.processEvent(smartHome, sensorEvent1);
+        Door door1 = findDoorByID(smartHome,"1");
+        System.out.println("First is Ok");
+        assertEquals(true, door1.getIsOpen());
+
         System.out.println("Second test");
-        for (Room room : smarthome.getRooms()) {
-            for (Door door : room.getDoors()) {
-                if (door.getId().equals("2"))
-                    assertEquals(false, door.getIsOpen());
-            }
-        }
+        doorEventProcessor.processEvent(smartHome, sensorEvent2);
+        Door door2 = findDoorByID(smartHome,"2");
+        System.out.println("Second is Ok");
+        assertEquals(false, door2.getIsOpen());
 
     }
+
 
 
 }
