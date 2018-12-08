@@ -2,33 +2,29 @@ package ru.sbt.mipt.oop.alarm;
 
 
 public class DeactivatedState implements IAlarmState {
-    private Signal signal;
 
-    public DeactivatedState(Signal signal) {
-        this.signal = signal;
-        this.signal.setSecretCode("0000");
-        System.out.println( "Signaling disabled");
+    @Override
+    public IAlarmState activate(String inputCode, String password) {
+        if (inputCode.equals(password)) {
+            System.out.println("Alarm was activated");
+            return new ActivatedState();
+        } else {
+            return danger();
+        }
     }
 
     @Override
-    public void changeState(IAlarmState state) {
-        signal.changeState(state);
+    public IAlarmState deactivate(String inputCode, String password) {
+
+        System.out.println("Alarm have already deactivated");
+
+
+        return this;
     }
 
     @Override
-    public void activate(String code) {
-        signal.changeState(new ActivatedState(signal,code));
-        System.out.println("Signaling was activated. The Home is under control!");
-    }
-
-    @Override
-    public void deactivate(String code) {
-        System.out.println( " Signaling is already disabled");
-    }
-
-    @Override
-    public void setToAlarm() {
-        System.out.println( "Something goes wrong...");
-        changeState(new AlarmOnState(signal));
+    public IAlarmState danger() {
+        System.out.println("Alarm is in danger state");
+        return new DangerSignalState();
     }
 }

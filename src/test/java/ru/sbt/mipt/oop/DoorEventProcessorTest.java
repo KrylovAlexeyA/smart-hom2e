@@ -2,6 +2,10 @@ package ru.sbt.mipt.oop;
 
 import org.junit.*;
 import org.junit.Test;
+import ru.sbt.mipt.oop.EventProcessors.DoorEventProcessor;
+import ru.sbt.mipt.oop.SmartHomeLoading.FileSmartHomeLoader;
+import ru.sbt.mipt.oop.SmartHomeLoading.SmartHomeLoader;
+import ru.sbt.mipt.oop.simpleElements.Door;
 
 import java.io.IOException;
 

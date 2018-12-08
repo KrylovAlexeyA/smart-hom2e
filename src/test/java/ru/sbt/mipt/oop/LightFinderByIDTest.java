@@ -1,6 +1,10 @@
 package ru.sbt.mipt.oop;
 
 import org.junit.Test;
+import ru.sbt.mipt.oop.EventProcessors.LightsEventProcessor;
+import ru.sbt.mipt.oop.SmartHomeLoading.FileSmartHomeLoader;
+import ru.sbt.mipt.oop.SmartHomeLoading.SmartHomeLoader;
+import ru.sbt.mipt.oop.simpleElements.Light;
 
 import java.io.IOException;
 

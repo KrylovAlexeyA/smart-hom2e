@@ -1,6 +1,9 @@
 package ru.sbt.mipt.oop;
 
 import org.junit.*;
+import ru.sbt.mipt.oop.EventProcessors.HallDoorEventProcessor;
+import ru.sbt.mipt.oop.simpleElements.Light;
+import ru.sbt.mipt.oop.simpleElements.Room;
 
 import static org.junit.Assert.*;
 

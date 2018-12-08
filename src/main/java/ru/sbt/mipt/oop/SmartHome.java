@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.simpleElements.Light;
+import ru.sbt.mipt.oop.simpleElements.Room;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

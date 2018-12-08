@@ -1,6 +1,12 @@
 package ru.sbt.mipt.oop;
 
 
+import ru.sbt.mipt.oop.EventProcessors.DoorEventProcessor;
+import ru.sbt.mipt.oop.EventProcessors.HallDoorEventProcessor;
+import ru.sbt.mipt.oop.EventProcessors.LightsEventProcessor;
+import ru.sbt.mipt.oop.SmartHomeLoading.FileSmartHomeLoader;
+import ru.sbt.mipt.oop.SmartHomeLoading.SmartHomeLoader;
+
 import java.io.IOException;
 
 

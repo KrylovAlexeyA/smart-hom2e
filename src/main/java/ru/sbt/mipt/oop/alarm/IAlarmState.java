@@ -1,12 +1,17 @@
 package ru.sbt.mipt.oop.alarm;
 
+
 public interface IAlarmState {
 
-    void changeState( IAlarmState state);
+    IAlarmState activate(String inputCode, String password);
 
-    void activate(String code);
-    void deactivate(String code);
+    IAlarmState deactivate(String inputCode, String password);
 
-    void setToAlarm();
+    default boolean isActivated(){
+
+        return false;
+    }
+
+    IAlarmState danger();
 
 }

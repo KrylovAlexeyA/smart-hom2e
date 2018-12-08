@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.EventProcessors.IEventProcessor;
+
 import java.util.ArrayList;
 import java.util.Collection;
 //лекция 6
