@@ -3,6 +3,8 @@ package ru.sbt.mipt.oop;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.sbt.mipt.oop.EventProcessors.DoorEventProcessor;
 import ru.sbt.mipt.oop.EventProcessors.HallDoorEventProcessor;
 import ru.sbt.mipt.oop.EventProcessors.IEventProcessor;
@@ -21,13 +23,14 @@ public class Application {
 
     private static SmartHomeLoader smartHomeLoader = new FileSmartHomeLoader();
     private static HomeEventsObserver homeEventsObserver = new HomeEventsObserver(new RandomSensorEventProvider());
+    ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class); //это пока заготовка
 
     public static void setSmartHomeLoader(SmartHomeLoader smartHomeLoader) {
         Application.smartHomeLoader = smartHomeLoader;
     }
 
     public static void main(String... args) throws IOException {
-        logger.info("Starting configuration...");
+        logger.info("Starting configuration...");//и это заготовка
         SmartHome smartHome = smartHomeLoader.loadSmartHome();
         homeEventsObserver.registerEventProcessor(new LightsEventProcessor());
         homeEventsObserver.registerEventProcessor(new DoorEventProcessor());
@@ -37,12 +40,6 @@ public class Application {
 
     }
 
-    private static ArrayList<IEventProcessor> configureEventProcessors() {
-        ArrayList<IEventProcessor> eventProcessors = new ArrayList<>();
-        eventProcessors.add(new LightsEventProcessor());
-        eventProcessors.add(new DoorEventProcessor());
-        eventProcessors.add(new HallDoorEventProcessor());
-        return eventProcessors;
-    }
+
 
 }
