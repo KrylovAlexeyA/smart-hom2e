@@ -4,8 +4,8 @@ package ru.sbt.mipt.oop.alarm;
 public class DeactivatedState implements IAlarmState {
 
     @Override
-    public IAlarmState activate(String inputCode, String password) {
-        if (inputCode.equals(password)) {
+    public IAlarmState activate(int code, int password) {
+        if (code == password) {
             System.out.println("Alarm was activated");
             return new ActivatedState();
         } else {
@@ -14,7 +14,7 @@ public class DeactivatedState implements IAlarmState {
     }
 
     @Override
-    public IAlarmState deactivate(String inputCode, String password) {
+    public IAlarmState deactivate(int code, int password) {
 
         System.out.println("Alarm have already deactivated");
 

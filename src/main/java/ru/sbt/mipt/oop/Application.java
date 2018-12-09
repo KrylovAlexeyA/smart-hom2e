@@ -9,6 +9,7 @@ import ru.sbt.mipt.oop.EventProcessors.IEventProcessor;
 import ru.sbt.mipt.oop.EventProcessors.LightsEventProcessor;
 import ru.sbt.mipt.oop.SmartHomeLoading.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.SmartHomeLoading.SmartHomeLoader;
+import ru.sbt.mipt.oop.alarm.Alarm;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class Application {
         homeEventsObserver.registerEventProcessor(new DoorEventProcessor());
         homeEventsObserver.registerEventProcessor(new HallDoorEventProcessor());
         homeEventsObserver.runEventsCycle(smartHome);
+
+
     }
 
     private static ArrayList<IEventProcessor> configureEventProcessors() {

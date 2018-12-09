@@ -3,11 +3,11 @@ package ru.sbt.mipt.oop.alarm;
 
 public interface IAlarmState {
 
-    IAlarmState activate(String inputCode, String password);
+    IAlarmState activate(int Code, int password);
 
-    IAlarmState deactivate(String inputCode, String password);
+    IAlarmState deactivate(int Code, int password);
 
-    default boolean isActivated(){
+    default boolean activated(){
 
         return false;
     }

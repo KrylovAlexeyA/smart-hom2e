@@ -8,30 +8,34 @@ public class Alarm implements IActionable, IPrintable {
 
 
     private IAlarmState state;
-    private final String id;
-    private String password;
+    private final int id;
+    private int password;
 
 
-    public Alarm(String password, String id) {
+    public Alarm(int password, int id) {
         this.password = password;
         this.state = new DeactivatedState();
         this.id = id;
     }
 
-    public String getId() {
+    public IAlarmState getState(){
+        return state;
+    }
+
+    public int getId() {
 
         return id;
     }
 
-    public void activate(String inputCode) {
+    public void activate(int code) {
 
-        state = state.activate(inputCode, password);
+        state = state.activate(code, password);
 
     }
 
-    public void deactivate(String inputCode){
+    public void deactivate(int code){
 
-        state = state.deactivate(inputCode, password);
+        state = state.deactivate(code, password);
 
     }
 
@@ -40,9 +44,9 @@ public class Alarm implements IActionable, IPrintable {
         state = state.danger();
     }
 
-    public boolean isActivated(){
+    public boolean activated(){
 
-        return state.isActivated();
+        return state.activated();
     }
 
     @Override
