@@ -18,4 +18,6 @@ public class ActivateCommand implements IRCcommand {
 
         alarm.activate(alarm.getId());
     }
+
+
 }

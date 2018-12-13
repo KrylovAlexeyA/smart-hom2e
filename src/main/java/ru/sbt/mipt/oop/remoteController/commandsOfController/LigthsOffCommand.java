@@ -14,6 +14,6 @@ public class LigthsOffCommand implements IRCcommand {
     @Override
     public void execute() {
 
-        //smartHome.turnOffAllLights(true);
+        smartHome.turnOffLights();
     }
 }

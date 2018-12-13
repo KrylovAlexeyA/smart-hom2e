@@ -4,6 +4,8 @@ import org.junit.Test;
 import ru.sbt.mipt.oop.EventProcessors.DoorEventProcessor;
 import ru.sbt.mipt.oop.EventProcessors.HallDoorEventProcessor;
 import ru.sbt.mipt.oop.EventProcessors.LightsEventProcessor;
+
+import ru.sbt.mipt.oop.SensorEventsProviders.SensorEventProviderList;
 import ru.sbt.mipt.oop.SmartHomeLoading.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.SmartHomeLoading.SmartHomeLoader;
 import ru.sbt.mipt.oop.simpleElements.Door;
@@ -16,7 +18,7 @@ import static ru.sbt.mipt.oop.DoorFinderByID.findDoorByID;
 public class HomeEventsObserverTest {
     private static SmartHomeLoader smartHomeLoader = new FileSmartHomeLoader();
     SmartHome smartHome = smartHomeLoader.loadSmartHome();
-    public RandomSensorEventProvider randomSensorEventProvider = new RandomSensorEventProvider();
+    public SensorEventProviderList sensorEventProviderList = new SensorEventProviderList();
 
 
     public HomeEventsObserverTest() throws IOException {
@@ -61,18 +63,15 @@ public class HomeEventsObserverTest {
 
     @Test
     public void runEventsCycle() {
-        HomeEventsObserver homeEventsObserver2 = new HomeEventsObserver(randomSensorEventProvider);
+        HomeEventsObserver homeEventsObserver2 = new HomeEventsObserver(sensorEventProviderList);
         SensorEventType sensoreventtype1 = SensorEventType.DOOR_OPEN;
-        SensorEventType sensoreventtype2 = SensorEventType.DOOR_CLOSED;
         String objectId1 = "1";
-        String objectId2 = "2";
-        SensorEvent sensorEvent1 = new SensorEvent(sensoreventtype1, objectId1);
-        SensorEvent sensorEvent2 = new SensorEvent(sensoreventtype2, objectId2);
         homeEventsObserver2.registerEventProcessor(new LightsEventProcessor());
         homeEventsObserver2.registerEventProcessor(new DoorEventProcessor());
         homeEventsObserver2.registerEventProcessor(new HallDoorEventProcessor());
         homeEventsObserver2.runEventsCycle(smartHome);
-        //Тут сложно написать какой то ассерт, потому что события рандомные но HomeEventsObserver пишет в лог,
-        //что произошли такие то события , так что сойдет за тест наверное
+        Door door1 = findDoorByID(smartHome,"1");
+        assertEquals(true, door1.getIsOpen());
+
     }
 }

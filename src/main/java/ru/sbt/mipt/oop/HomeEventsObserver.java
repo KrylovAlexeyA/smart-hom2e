@@ -2,6 +2,7 @@
 package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.EventProcessors.IEventProcessor;
+import ru.sbt.mipt.oop.SensorEventsProviders.ISensorEventProvider;
 
 import java.util.ArrayList;
 

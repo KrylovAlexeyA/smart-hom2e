@@ -44,7 +44,7 @@ public class Alarm implements IActionable, IPrintable {
         state = state.danger();
     }
 
-    public boolean activated(){
+    public boolean activate(){
 
         return state.activated();
     }

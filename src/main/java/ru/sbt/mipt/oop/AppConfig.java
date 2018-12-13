@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.SensorEventsProviders.RandomSensorEventProvider;
 import ru.sbt.mipt.oop.SmartHomeLoading.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.SmartHomeLoading.SmartHomeLoader;
 import org.springframework.context.annotation.Bean;

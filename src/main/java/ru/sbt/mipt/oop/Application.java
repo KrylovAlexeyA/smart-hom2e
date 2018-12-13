@@ -7,15 +7,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.sbt.mipt.oop.EventProcessors.DoorEventProcessor;
 import ru.sbt.mipt.oop.EventProcessors.HallDoorEventProcessor;
-import ru.sbt.mipt.oop.EventProcessors.IEventProcessor;
 import ru.sbt.mipt.oop.EventProcessors.LightsEventProcessor;
+import ru.sbt.mipt.oop.SensorEventsProviders.RandomSensorEventProvider;
 import ru.sbt.mipt.oop.SmartHomeLoading.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.SmartHomeLoading.SmartHomeLoader;
-import ru.sbt.mipt.oop.alarm.Alarm;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 
 
 public class Application {
